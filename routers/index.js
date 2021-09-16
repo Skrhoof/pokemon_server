@@ -5,7 +5,7 @@ const express = require('express')
 const md5 = require('blueimp-md5')
 
 const UserModel = require('../models/UserModel')
-const CategoryModel = require('../models/CategoryModel')
+const SpeciesModel = require('../models/SpeciesModel')
 const ProductModel = require('../models/ProductModel')
 const RoleModel = require('../models/RoleModel')
 
@@ -147,7 +147,7 @@ router.get('/manage/user/list', (req, res) => {
 // 添加分类
 router.post('/manage/species/add', (req, res) => {
   const {speciesName, parentId} = req.body
-  CategoryModel.create({name: speciesName, parentId: parentId || '0'})
+  SpeciesModel.create({name: speciesName, parentId: parentId || '0'})
     .then(species => {
       res.send({status: 0, data: species})
     })
@@ -160,7 +160,7 @@ router.post('/manage/species/add', (req, res) => {
 // 获取分类列表
 router.get('/manage/species/list', (req, res) => {
   const parentId = req.query.parentId || '0'
-  CategoryModel.find({parentId})
+  SpeciesModel.find({parentId})
     .then(species => {
       res.send({status: 0, data: species})
     })
@@ -173,7 +173,7 @@ router.get('/manage/species/list', (req, res) => {
 // 更新分类名称
 router.post('/manage/species/update', (req, res) => {
   const {speciesId, speciesName} = req.body
-  CategoryModel.findOneAndUpdate({_id: categoryId}, {name: categoryName})
+  SpeciesModel.findOneAndUpdate({_id: speciesId}, {name: speciesName})
     .then(oldCategory => {
       res.send({status: 0})
     })
@@ -185,10 +185,10 @@ router.post('/manage/species/update', (req, res) => {
 
 // 根据分类ID获取分类
 router.get('/manage/species/info', (req, res) => {
-  const categoryId = req.query.categoryId
-  CategoryModel.findOne({_id: categoryId})
-    .then(category => {
-      res.send({status: 0, data: category})
+  const speciesId = req.query.speciesId
+  SpeciesModel.findOne({_id: speciesId})
+    .then(species => {
+      res.send({status: 0, data: species})
     })
     .catch(error => {
       console.error('获取分类信息异常', error)
