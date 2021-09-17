@@ -1,4 +1,4 @@
-export default pokemonList=[
+module.exports = pokemonList=[
   {
     name:'森林蜥蜴',
     rarity:'0'
@@ -34,5 +34,21 @@ export default pokemonList=[
   {
     name:'臭臭泥',
     rarity:'0'
+  },
+  {
+    name:'大岩蛇',
+    rarity:'0'
+  },
+  {
+    name:'波比',
+    rarity:'0'
+  },
+  {
+    name:'喷火龙',
+    rarity:'1'
+  },
+  {
+    name:'皮卡丘',
+    rarity:'1'
   },
 ]
