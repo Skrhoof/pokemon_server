@@ -202,7 +202,7 @@ router.get('/manage/species/info', (req, res) => {
 
 
 // 添加产品
-router.post('/manage/product/add', (req, res) => {
+router.post('/manage/pokemon/add', (req, res) => {
   const product = req.body
   PokemonModel.create(product)
     .then(product => {
@@ -222,27 +222,27 @@ router.get('/manage/pokemon/list', (req, res) => {
       res.send({ status: 0, data: pageFilter(pokemon, pageNum, pageSize) })
     })
     .catch(error => {
-      console.error('获取商品列表异常', error)
-      res.send({ status: 1, msg: '获取商品列表异常, 请重新尝试' })
+      console.error('获取宝可梦列表异常', error)
+      res.send({ status: 1, msg: '获取宝可梦列表异常, 请重新尝试' })
     })
 })
 
 // 搜索宝可梦列表
 router.get('/manage/pokemon/search', (req, res) => {
-  const { pageNum, pageSize, searchName, productName, productDesc } = req.query
+  const { pageNum, pageSize, searchName, pokemonName, pokemonDesc } = req.query
   let contition = {}
-  if (productName) {
-    contition = { name: new RegExp(`^.*${productName}.*$`) }
-  } else if (productDesc) {
-    contition = { desc: new RegExp(`^.*${productDesc}.*$`) }
+  if (pokemonName) {
+    contition = { name: new RegExp(`^.*${pokemonName}.*$`) }
+  } else if (pokemonDesc) {
+    contition = { desc: new RegExp(`^.*${pokemonDesc}.*$`) }
   }
   PokemonModel.find(contition)
-    .then(products => {
-      res.send({ status: 0, data: pageFilter(products, pageNum, pageSize) })
+    .then(pokemons => {
+      res.send({ status: 0, data: pageFilter(pokemons, pageNum, pageSize) })
     })
     .catch(error => {
-      console.error('搜索商品列表异常', error)
-      res.send({ status: 1, msg: '搜索商品列表异常, 请重新尝试' })
+      console.error('搜索宝可梦列表异常', error)
+      res.send({ status: 1, msg: '搜索宝可梦列表异常, 请重新尝试' })
     })
 })
 
