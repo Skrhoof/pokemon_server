@@ -201,16 +201,16 @@ router.get('/manage/species/info', (req, res) => {
 })
 
 
-// 添加产品
+// 添加宝可梦
 router.post('/manage/pokemon/add', (req, res) => {
-  const product = req.body
-  PokemonModel.create(product)
-    .then(product => {
-      res.send({ status: 0, data: product })
+  const pokemon = req.body
+  PokemonModel.create(pokemon)
+    .then(pokemon => {
+      res.send({ status: 0, data: pokemon })
     })
     .catch(error => {
-      console.error('添加产品异常', error)
-      res.send({ status: 1, msg: '添加产品异常, 请重新尝试' })
+      console.error('添加宝可梦异常', error)
+      res.send({ status: 1, msg: '添加宝可梦异常, 请重新尝试' })
     })
 })
 
