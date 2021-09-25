@@ -214,6 +214,19 @@ router.post('/manage/pokemon/add', (req, res) => {
     })
 })
 
+// 更新宝可梦
+router.post('/manage/pokemon/update', (req, res) => {
+  const pokemon = req.body
+  PokemonModel.findOneAndUpdate({ _id: pokemon._id }, pokemon)
+    .then(oldPokemon => {
+      res.send({ status: 0 })
+    })
+    .catch(error => {
+      console.error('更新宝可梦异常', error)
+      res.send({ status: 1, msg: '更新宝可梦异常, 请重新尝试' })
+    })
+})
+
 // 获取宝可梦分页列表
 router.get('/manage/pokemon/list', (req, res) => {
   const { pageNum, pageSize } = req.query
@@ -246,18 +259,6 @@ router.get('/manage/pokemon/search', (req, res) => {
     })
 })
 
-// 更新产品
-router.post('/manage/product/update', (req, res) => {
-  const product = req.body
-  PokemonModel.findOneAndUpdate({ _id: product._id }, product)
-    .then(oldProduct => {
-      res.send({ status: 0 })
-    })
-    .catch(error => {
-      console.error('更新商品异常', error)
-      res.send({ status: 1, msg: '更新商品名称异常, 请重新尝试' })
-    })
-})
 
 // 更新产品状态(上架/下架)
 router.post('/manage/product/updateStatus', (req, res) => {
