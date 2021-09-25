@@ -67,7 +67,7 @@ router.post('/manage/user/add', (req, res) => {
         })
       } else { // 没值(不存在)
         // 保存
-        return UserModel.create({ ...req.body, password: md5(password || 'atguigu') })
+        return UserModel.create({ ...req.body, password: md5(password || '123') })
       }
     })
     .then(user => {
@@ -260,16 +260,16 @@ router.get('/manage/pokemon/search', (req, res) => {
 })
 
 
-// 更新产品状态(上架/下架)
-router.post('/manage/product/updateStatus', (req, res) => {
-  const { productId, status } = req.body
-  PokemonModel.findOneAndUpdate({ _id: productId }, { status })
+// 更新宝可梦状态(上架/下架)
+router.post('/manage/pokemon/updateStatus', (req, res) => {
+  const { pokemonId, status } = req.body
+  PokemonModel.findOneAndUpdate({ _id: pokemonId }, { status })
     .then(oldProduct => {
       res.send({ status: 0 })
     })
     .catch(error => {
-      console.error('更新产品状态异常', error)
-      res.send({ status: 1, msg: '更新产品状态异常, 请重新尝试' })
+      console.error('更新宝可梦状态异常', error)
+      res.send({ status: 1, msg: '更新宝可梦状态异常, 请重新尝试' })
     })
 })
 
